@@ -69,6 +69,34 @@ void MinValueStr(int[,] array)
     Console.WriteLine($"Наименьшая сумма элементов находится в строке {str}.");
 }
 
+int[,] ProductMatrix (int[,] array1, int[,] array2)
+{
+    int[,] resultArray = new int [2, 2];
+    for (int i = 0; i < resultArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < resultArray.GetLength(1); j++)
+        {
+            if(i == 0 && j == 0)
+            {
+                resultArray[i, j] = array1[0, 0] * array2[0, 0] + array1[0, 1] * array2[1, 0];
+            }
+            else if(i == 0 && j == 1)
+            {
+                resultArray[i, j] = array1[0, 0] * array2[0, 1] + array1[0, 1] * array2[1, 1];
+            }
+            else if(i == 1 && j == 0)
+            {
+                resultArray[i, j] = array1[1, 0] * array2[0, 0] + array1[1, 1] * array2[1, 0];
+            }
+            else if(i == 1 && j == 1)
+            {
+                resultArray[i, j] = array1[1, 0] * array2[0, 1] + array1[1, 1] * array2[1, 1];
+            }
+        }
+    }
+    return resultArray;
+}
+
 Console.WriteLine("Задача 54");
 // Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 // Например, задан массив:
@@ -101,3 +129,24 @@ int [,] matrix2 = FillMatrix(EnterNumber("Введите колличество 
 PrintMatrix(matrix2);
 MinValueStr(matrix2);
 Console.WriteLine();
+
+Console.WriteLine("Задача 58");
+// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+// Например, даны 2 матрицы:
+// 2 4 | 3 4
+// 3 2 | 3 3
+// Результирующая матрица будет:
+// 18 20
+// 15 18
+
+int [,] matrix3 = FillMatrix(2, 2);
+int [,] matrix4 = FillMatrix(2, 2);
+Console.WriteLine("Матрица 1:");
+PrintMatrix(matrix3);
+Console.WriteLine();
+Console.WriteLine("Матрица 2:");
+PrintMatrix(matrix4);
+Console.WriteLine();
+Console.WriteLine("Произведение матриц:");
+PrintMatrix(ProductMatrix(matrix3, matrix4));
+
