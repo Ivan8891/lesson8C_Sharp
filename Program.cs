@@ -18,6 +18,22 @@ int[,] FillMatrix(int lengthI, int lengthJ)
     return array;
 }
 
+int[,,] FillMatrix3d(int lengthI, int lengthJ, int lengthY)
+{
+    int[,,] array = new int[lengthI, lengthJ, lengthY];
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int y = 0; y < array.GetLength(2); y++)
+            {
+                array[i, j, y] = new Random().Next(10, 100);
+            }
+        }
+    }
+    return array;
+}
+
 void PrintMatrix(int[,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
@@ -27,6 +43,21 @@ void PrintMatrix(int[,] array)
             Console.Write(array[i, j] + "  ");
         }
         Console.WriteLine();
+    }
+}
+
+void PrintMatrix3d(int[,,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int y = 0; y < array.GetLength(2); y++)
+            {
+                Console.Write($"{array[i, j, y]} ({i}, {j}, {y}) ");
+            }
+            Console.WriteLine();
+        }
     }
 }
 
@@ -78,13 +109,9 @@ int[,] ProductMatrix(int[,] array1, int[,] array2)
         {
             for (int j = 0; j < resultArray.GetLength(1); j++)
             {
-                int n = 0;
-                int m = 0;
-                for (int count = 0; count < resultArray.GetLength(1); count++)
+                for ( int n = 0; n < resultArray.GetLength(1); n++)
                 {
-                    resultArray[i, j] += array1[i, m] * array2[n, j];
-                    n++;
-                    m++;
+                    resultArray[i, j] += array1[i, n] * array2[n, j];
                 }
             }
         }
@@ -135,14 +162,23 @@ Console.WriteLine("Задача 58");
 // 18 20
 // 15 18
 
-int[,] matrix3 = FillMatrix(EnterNumber("Введите колличество строк матрицы А: "), EnterNumber("Введите колличество столбцов матрицы А: "));
-int[,] matrix4 = FillMatrix(EnterNumber("Введите колличество строк матрицы В: "), EnterNumber("Введите колличество столбцов матрицы В: "));
-Console.WriteLine("Матрица 1:");
-PrintMatrix(matrix3);
-Console.WriteLine();
-Console.WriteLine("Матрица 2:");
-PrintMatrix(matrix4);
-Console.WriteLine();
-Console.WriteLine("Произведение матриц:");
-PrintMatrix(ProductMatrix(matrix3, matrix4));
+// int[,] matrix3 = FillMatrix(EnterNumber("Введите колличество строк матрицы А: "), EnterNumber("Введите колличество столбцов матрицы А: "));
+// int[,] matrix4 = FillMatrix(EnterNumber("Введите колличество строк матрицы В: "), EnterNumber("Введите колличество столбцов матрицы В: "));
+// Console.WriteLine("Матрица 1:");
+// PrintMatrix(matrix3);
+// Console.WriteLine();
+// Console.WriteLine("Матрица 2:");
+// PrintMatrix(matrix4);
+// Console.WriteLine();
+// Console.WriteLine("Произведение матриц:");
+// PrintMatrix(ProductMatrix(matrix3, matrix4));
 
+Console.WriteLine("Задача 60");
+// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+// Массив размером 2 x 2 x 2
+// 66(0,0,0) 25(0,1,0)
+// 34(1,0,0) 41(1,1,0)
+// 27(0,0,1) 90(0,1,1)
+// 26(1,0,1) 55(1,1,1)
+
+PrintMatrix3d(FillMatrix3d(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "), EnterNumber("Введите колличество строк: ")));
