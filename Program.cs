@@ -1,34 +1,34 @@
-﻿int EnterNumber (string message)
+﻿int EnterNumber(string message)
 {
-	Console.WriteLine(message);
-	int number = Convert.ToInt32(Console.ReadLine());
-	return number;
+    Console.WriteLine(message);
+    int number = Convert.ToInt32(Console.ReadLine());
+    return number;
 }
 
-int[,] FillMatrix (int lengthI, int lengthJ)
+int[,] FillMatrix(int lengthI, int lengthJ)
 {
-	int [,] array = new int [lengthI, lengthJ];
-	for (int i = 0; i < array.GetLength(0); i++)
-	{
-		for (int j = 0; j < array.GetLength(1); j++)
-		{	
-			array [i, j] = new Random().Next(1, 10);
-		}
-	}
-	return array;
-}	
+    int[,] array = new int[lengthI, lengthJ];
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(1, 10);
+        }
+    }
+    return array;
+}
 
-void PrintMatrix( int[,] array)
+void PrintMatrix(int[,] array)
 {
-	for ( int i = 0; i < array.GetLength(0); i++)
-	{
-		for ( int j = 0; j < array.GetLength(1); j++)
-		{
-			Console.Write(array[i, j] + "  ");
-		}
-		Console.WriteLine();
-	}
-}	
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i, j] + "  ");
+        }
+        Console.WriteLine();
+    }
+}
 
 void SortMatrix(int[,] array2d)
 {
@@ -44,7 +44,7 @@ void SortMatrix(int[,] array2d)
         for (int j = 0; j < array2d.GetLength(1); j++)
         {
             array2d[i, j] = sortArray[j];
-            
+
         }
     }
 }
@@ -61,39 +61,35 @@ void MinValueStr(int[,] array)
             sum += array[i, j];
         }
         if (min == 0 || sum < min)
-            {
-                min = sum;
-                str = i + 1;
-            }
+        {
+            min = sum;
+            str = i + 1;
+        }
     }
     Console.WriteLine($"Наименьшая сумма элементов находится в строке {str}.");
 }
 
-int[,] ProductMatrix (int[,] array1, int[,] array2)
+int[,] ProductMatrix(int[,] array1, int[,] array2)
 {
-    int[,] resultArray = new int [2, 2];
-    for (int i = 0; i < resultArray.GetLength(0); i++)
+    int[,] resultArray = new int[array1.GetLength(0), array2.GetLength(1)];
+    if (array1.GetLength(1) == array2.GetLength(0))
     {
-        for (int j = 0; j < resultArray.GetLength(1); j++)
+        for (int i = 0; i < resultArray.GetLength(0); i++)
         {
-            if(i == 0 && j == 0)
+            for (int j = 0; j < resultArray.GetLength(1); j++)
             {
-                resultArray[i, j] = array1[0, 0] * array2[0, 0] + array1[0, 1] * array2[1, 0];
-            }
-            else if(i == 0 && j == 1)
-            {
-                resultArray[i, j] = array1[0, 0] * array2[0, 1] + array1[0, 1] * array2[1, 1];
-            }
-            else if(i == 1 && j == 0)
-            {
-                resultArray[i, j] = array1[1, 0] * array2[0, 0] + array1[1, 1] * array2[1, 0];
-            }
-            else if(i == 1 && j == 1)
-            {
-                resultArray[i, j] = array1[1, 0] * array2[0, 1] + array1[1, 1] * array2[1, 1];
+                int n = 0;
+                int m = 0;
+                for (int count = 0; count < resultArray.GetLength(1); count++)
+                {
+                    resultArray[i, j] += array1[i, m] * array2[n, j];
+                    n++;
+                    m++;
+                }
             }
         }
     }
+    else Console.WriteLine("Ошибка! Матрицу А можно умножить на матрицу В, только если число столбцов матрицы А равно числу строк матрицы В.");
     return resultArray;
 }
 
@@ -108,11 +104,11 @@ Console.WriteLine("Задача 54");
 // 9 5 3 2
 // 8 4 4 2
 
-int [,] matrix = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
-PrintMatrix(matrix);
-Console.WriteLine();
-SortMatrix(matrix);
-PrintMatrix(matrix);
+// int[,] matrix = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
+// PrintMatrix(matrix);
+// Console.WriteLine();
+// SortMatrix(matrix);
+// PrintMatrix(matrix);
 Console.WriteLine();
 
 Console.WriteLine("Задача 56");
@@ -125,10 +121,10 @@ Console.WriteLine("Задача 56");
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
-int [,] matrix2 = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
-PrintMatrix(matrix2);
-MinValueStr(matrix2);
-Console.WriteLine();
+// int[,] matrix2 = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
+// PrintMatrix(matrix2);
+// MinValueStr(matrix2);
+// Console.WriteLine();
 
 Console.WriteLine("Задача 58");
 // Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
@@ -139,8 +135,8 @@ Console.WriteLine("Задача 58");
 // 18 20
 // 15 18
 
-int [,] matrix3 = FillMatrix(2, 2);
-int [,] matrix4 = FillMatrix(2, 2);
+int[,] matrix3 = FillMatrix(EnterNumber("Введите колличество строк матрицы А: "), EnterNumber("Введите колличество столбцов матрицы А: "));
+int[,] matrix4 = FillMatrix(EnterNumber("Введите колличество строк матрицы В: "), EnterNumber("Введите колличество столбцов матрицы В: "));
 Console.WriteLine("Матрица 1:");
 PrintMatrix(matrix3);
 Console.WriteLine();
