@@ -109,7 +109,7 @@ int[,] ProductMatrix(int[,] array1, int[,] array2)
         {
             for (int j = 0; j < resultArray.GetLength(1); j++)
             {
-                for ( int n = 0; n < resultArray.GetLength(1); n++)
+                for (int n = 0; n < resultArray.GetLength(1); n++)
                 {
                     resultArray[i, j] += array1[i, n] * array2[n, j];
                 }
@@ -118,6 +118,80 @@ int[,] ProductMatrix(int[,] array1, int[,] array2)
     }
     else Console.WriteLine("Ошибка! Матрицу А можно умножить на матрицу В, только если число столбцов матрицы А равно числу строк матрицы В.");
     return resultArray;
+}
+
+int[,] FillSpiral(int n, int m)
+{
+    int[,] array = new int[n, m];
+    int count = 1;
+    int i = 0;
+    int j = 0;
+    bool stop = true;
+    array[i, j] = count;
+    while (count < array.GetLength(0) * array.GetLength(1))
+    {
+        while (stop)
+        {
+            if (j + 1 < array.GetLength(1))
+            {
+                if (array[i, j + 1] == 0)
+                {
+                    j++;
+                    count++;
+                    array[i, j] = count;
+                }
+                else stop = false;
+            }
+            else stop = false;
+        }
+        stop = true;
+        while (stop)
+        {
+            if (i + 1 < array.GetLength(0))
+            {
+                if (array[i + 1, j] == 0)
+                {
+                    i++;
+                    count++;
+                    array[i, j] = count;
+                }
+                else stop = false;
+            }
+            else stop = false;
+        }
+        stop = true;
+        while (stop)
+        {
+            if (j > 0)
+            {
+                if (array[i, j - 1] == 0)
+                {
+                    j--;
+                    count++;
+                    array[i, j] = count;
+                }
+                else stop = false;
+            }
+            else stop = false;
+        }
+        stop = true;
+        while (stop)
+        {
+            if (i > 0)
+            {
+                if (array[i - 1, j] == 0)
+                {
+                    i--;
+                    count++;
+                    array[i, j] = count;
+                }
+                else stop = false;
+            }
+            else stop = false;
+        }
+        stop = true;
+    }
+    return array;
 }
 
 Console.WriteLine("Задача 54");
@@ -131,11 +205,11 @@ Console.WriteLine("Задача 54");
 // 9 5 3 2
 // 8 4 4 2
 
-// int[,] matrix = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
-// PrintMatrix(matrix);
-// Console.WriteLine();
-// SortMatrix(matrix);
-// PrintMatrix(matrix);
+int[,] matrix = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
+PrintMatrix(matrix);
+Console.WriteLine();
+SortMatrix(matrix);
+PrintMatrix(matrix);
 Console.WriteLine();
 
 Console.WriteLine("Задача 56");
@@ -148,10 +222,10 @@ Console.WriteLine("Задача 56");
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
-// int[,] matrix2 = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
-// PrintMatrix(matrix2);
-// MinValueStr(matrix2);
-// Console.WriteLine();
+int[,] matrix2 = FillMatrix(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
+PrintMatrix(matrix2);
+MinValueStr(matrix2);
+Console.WriteLine();
 
 Console.WriteLine("Задача 58");
 // Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
@@ -162,16 +236,17 @@ Console.WriteLine("Задача 58");
 // 18 20
 // 15 18
 
-// int[,] matrix3 = FillMatrix(EnterNumber("Введите колличество строк матрицы А: "), EnterNumber("Введите колличество столбцов матрицы А: "));
-// int[,] matrix4 = FillMatrix(EnterNumber("Введите колличество строк матрицы В: "), EnterNumber("Введите колличество столбцов матрицы В: "));
-// Console.WriteLine("Матрица 1:");
-// PrintMatrix(matrix3);
-// Console.WriteLine();
-// Console.WriteLine("Матрица 2:");
-// PrintMatrix(matrix4);
-// Console.WriteLine();
-// Console.WriteLine("Произведение матриц:");
-// PrintMatrix(ProductMatrix(matrix3, matrix4));
+int[,] matrix3 = FillMatrix(EnterNumber("Введите колличество строк матрицы А: "), EnterNumber("Введите колличество столбцов матрицы А: "));
+int[,] matrix4 = FillMatrix(EnterNumber("Введите колличество строк матрицы В: "), EnterNumber("Введите колличество столбцов матрицы В: "));
+Console.WriteLine("Матрица 1:");
+PrintMatrix(matrix3);
+Console.WriteLine();
+Console.WriteLine("Матрица 2:");
+PrintMatrix(matrix4);
+Console.WriteLine();
+Console.WriteLine("Произведение матриц:");
+PrintMatrix(ProductMatrix(matrix3, matrix4));
+Console.WriteLine();
 
 Console.WriteLine("Задача 60");
 // Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
@@ -181,4 +256,16 @@ Console.WriteLine("Задача 60");
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-PrintMatrix3d(FillMatrix3d(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "), EnterNumber("Введите колличество строк: ")));
+PrintMatrix3d(FillMatrix3d(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "), EnterNumber("Введите глубину массива: ")));
+Console.WriteLine();
+
+Console.WriteLine("Задача 62");
+// Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+// Например, на выходе получается вот такой массив:
+// 01 02 03 04
+// 12 13 14 05
+// 11 16 15 06
+// 10 09 08 07
+
+int[,] matrix5 = FillSpiral(EnterNumber("Введите колличество строк: "), EnterNumber("Введите количество столбцов: "));
+PrintMatrix(matrix5);
